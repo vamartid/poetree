@@ -1,0 +1,17 @@
+<!-- templates/delete.pug -->
+{% extends 'base.pug' %}
+{% load staticfiles %}
+{% block content %}
+.text-center
+  .content-section
+    form(method='POST')
+      | {% csrf_token %}
+      fieldset.form-group
+        legend.border-bottom.mb-4 διαγραφή ποίηματος
+        h2 είσαι σίγορος πως θες να διαγραψεις το "{{object.title}}"
+        .form-group
+            button.btn.btn-outline-danger(type='submit')
+                i.fas.fa-check
+            a.btn.btn-outline-dark(href="{% url 'poetree_poem_detail' object.id %}")
+                i.fas.fa-times
+{% endblock content %}

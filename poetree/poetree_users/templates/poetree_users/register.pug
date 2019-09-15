@@ -1,0 +1,45 @@
+<!-- templates/register.html -->
+{% extends 'base.pug' %}
+{% load staticfiles %}
+{% load staticfiles %}
+
+{% block content %}
+.row
+  .col.s12
+    .container
+      #login-page.row
+        .col.s8.card-panel.border-radius-6.login-card.bg-opacity-8
+          form.login-form(method="POST" autocomplete="off")
+            {% csrf_token %}
+            .row
+              .input-field.col.s12
+                h5.ml-4 {{title}}
+            .row.margin.form-group
+              .input-field.col.s12
+                i.material-icons.prefix.pt-2 person_outline
+                input#username(type='text' name="{{ form.username.html_name }}" )
+                label.center-align(for='username') Username
+            .row.margin.form-group
+              .input-field.col.s12
+                i.material-icons.prefix.pt-2 email_outline
+                input#email(type='text' name="{{ form.email.html_name }}" )
+                label.center-align(for='email') email
+            .row.margin.form-group
+              .input-field.col.s12
+                i.material-icons.prefix.pt-2 lock
+                input#password(type='password' name="{{ form.password1.html_name }}" )
+                label(for='password') Password
+            .row.margin.form-group
+              .input-field.col.s12
+                i.material-icons.prefix.pt-2 lock_outline
+                input#password2(type='password' name="{{ form.password2.html_name }}" )
+                label(for='password2') Retype Password
+            .row.form-group
+              .input-field.col.s12
+                button.btn.waves-effect.waves-light.border-round.gradient-45deg-purple-deep-orange.col.s12 επικύρωση
+            .row
+              .col.s8.m8.l8
+                p.margin.medium-small
+                  | έχεις ήδη λογαριασμό;
+                  a(href="{% url 'poetree_login' %}") είσοδος
+{% endblock content %}

@@ -1,0 +1,25 @@
+{% extends 'base.pug' %}
+{% load staticfiles %}
+
+{% block content %}
+.text-center
+    .card.white
+        .card-content
+            span.card-title.center
+                {{ object.title }}
+            p.text-left
+                {{ object.content|linebreaks }}
+        .card-action
+            a.left(href="{% url 'poetree_user_poems' object.author.username %}")
+                {{ object.author }}
+            {{ object.date_posted|date:"l d F Y" }}
+
+    {% if object.author == user %}
+    div
+        a.waves-effect.waves-light.btn(href="{% url 'poetree_poem_update' object.id %}")
+            i.fas.fa-edit
+        a.waves-effect.waves-light.btn(href="{% url 'poetree_poem_delete' object.id %}")
+            i.fas.fa-eraser
+    {% endif %}
+
+{% endblock content %}

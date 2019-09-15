@@ -1,0 +1,18 @@
+<!-- templates/logout.pug -->
+{% extends 'base.pug' %}
+{% load staticfiles %}
+
+{% block content %}
+div.container
+  .div.row
+    span.flow-text
+        h3 {{ title }}
+        
+        h4.light αποσυνδεθήκες από το poetree</br> είσαι ένας απλός αναγνώστης.
+
+    
+        p.margin.medium-small
+            | έχεις ήδη λογαριασμό;
+            a(href="{% url 'poetree_login' %}") είσοδος
+    
+{% endblock content %}

@@ -1,0 +1,24 @@
+<!-- templates/register.html -->
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="text-center">
+<div class="content-section">
+    <form method="POST">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">{{title}}</legend>
+            {{ form|crispy }}
+        </fieldset>
+        <div class="form-group">
+            <button class="btn btn-outline-dark" type="submit"><i class="fas fa-check"></i></button>
+            {% if title == "επεξεργασία" %}
+            <a class="btn btn-outline-danger" href="{% url 'poetree_poem_detail' object.id %}"><i class="fas fa-times"></i></a>
+            {% endif %}
+        </div>
+    </form>
+</div></div>
+{% endblock content %}

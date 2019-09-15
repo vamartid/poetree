@@ -1,0 +1,95 @@
+// -- templates/base.pug
+{% load staticfiles %}
+{% load static sass_tags %}
+doctype html
+link(rel='stylesheet', type='text/css', href="{% sass_src 'mysass.scss' %}")
+link(rel='stylesheet', type='text/css', href="{% sass_src 'materialize/sass/materialize.scss' %}")
+link(rel='stylesheet', type='text/css', href="{% static 'animate.css' %}")
+//font awesome
+script(defer='' src="{% static '/fontawesome-free-5.10.2-web/js/all.js' %}")
+//jquery
+script(src="{% static 'jquery-3.4.1.min.js' %}")
+//materialize
+script(src="{% static 'materialize/js/bin/materialize.min.js' %}")
+
+script(src="{% static 'my_js.js' %}")
+
+body
+  //HEADER
+  header
+    .container
+      a.top-nav.sidenav-trigger.waves-effect.waves-light.circle.hide-on-large-only(href='#' data-target='nav-mobile')
+        i.material-icons menu
+    ul#nav-mobile.sidenav.sidenav-fixed(style='transform: translateX(0px);')
+      li.logo
+        div.waves-effect.waves-teal
+          a#logo-container.brand-logo(href="{% url 'poetree_home' %}")
+            img(src="{% static 'img/tree.png' %}" style="max-width: 100%;")
+      li.bold
+        {% if user.is_authenticated == False %}
+        a.waves-effect.waves-teal(href="{% url 'poetree_login' %}") είσοδος
+        {% else %}
+        a.waves-effect.waves-teal(href="{% url 'poetree_poem_create' %}") νέα δημιουργία
+      {% endif %}
+      li.bold
+        a.waves-effect.waves-teal(href="{% url 'poetree_poems' %}") ποιήματα
+
+      li
+        ul.collapsible.collapsible-accordion.no-padding
+          li.bold
+            a.collapsible-header.waves-effect.waves-teal(tabindex='0') συγγραφείς
+            .collapsible-body(style='')
+              ul
+                {% for loop_user in usernames %}
+                li
+                  a(href="{% url 'poetree_user_poems' loop_user %}") {{loop_user}}
+                {% endfor %}
+      li.bold
+        a.waves-effect.waves-teal(href="{% url 'poetree_about' %}") σχετικά
+      {% if user.is_authenticated %}
+      li.bold
+        a.waves-effect.waves-teal(href="{% url 'poetree_logout' %}") έξοδος
+      {% endif %}
+  
+  //MAIN   M.toast({html: 'I am a toast!', classes: 'rounded'}); 
+  //a.btn.tooltipped(data-position='bottom' data-tooltip='I am a tooltip') Hover me!
+  //Waves-effect waves-light btn-large
+  main
+    .section
+      .container
+        .row(style='margin-bottom: 0;')
+          .col.s12.m10.offset-m1
+              {% block content %}{% endblock content%}
+    .divider
+    
+  // FOOTER
+  footer.docs-footer
+  .container
+    .row(style='margin-bottom: 0;')
+      .col.s12.m10.offset-m1
+        p.grey-text.text-lighten-1 κι όσο το ποτίζεις με σκέψεις τόσο θα πλυσιάζει την ποίηση...
+        div
+        .footer-copyright.grey-text.text-lighten-1
+          | &copy; 2019 Copyright vamartid
+          a.grey-text.text-lighten-1.right(href='/') Licence
+
+
+script.
+  {% if messages %}
+    {% for message in messages %}
+      M.toast({{message}})
+    {% endfor %}
+  {% endif %}
+script.
+  $(document).ready(function(){
+    $('.collapsible').collapsible();
+  });
+
+
+  $(document).ready(function(){
+    $('.sidenav').sidenav();
+  });
+
+  $(document).ready(function(){
+    $('.tooltipped').tooltip();
+  });

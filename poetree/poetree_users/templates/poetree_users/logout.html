@@ -1,0 +1,14 @@
+<!-- templates/register.html -->
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+<div class="content-section text-center">
+    <h2>αποσυνδεθήκες από το poetree</br> είσαι ένας απλός αναγνώστης</h2>
+    <div class="border-top pt-3">
+        <small class="text-muted">
+            θέλεις να γράψεις στο poetree; <a class="ml-2" href="{% url 'poetree_login' %}">είσοδος</a>
+        </small>
+    </div>
+</div>
+{% endblock content %}

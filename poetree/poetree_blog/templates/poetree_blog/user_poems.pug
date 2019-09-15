@@ -1,0 +1,23 @@
+// -- templates/poetree_blog/user_poems.pug
+{% extends 'base.pug' %}
+
+{% load staticfiles %}
+{% load static sass_tags %}
+
+{% block content %}
+h1.mb-3.text-center το δεντράκι του {{view.kwargs.username}} έχει {{ page_obj.paginator.count }} κλαδάκια
+.row.justify-content-center
+  div
+    {% for post in posts %}
+    .card.m-2(style='max-width: 600px')
+      .card-body.card.bg-light
+        h5.card-title.text-center
+          a.article-title(href="{% url 'poetree_poem_detail' post.id %}") {{ post.title }}
+        p.card-text.text-right {{ post.content|linebreaks }}
+        .card-subtitle
+          a.float-left.mx-2(href="{% url 'poetree_user_poems' post.author.username %}") {{ post.author }}
+          small.text-muted.float-right.mx-2 {{ post.date_posted|date:'l d F Y' }}
+    {% endfor %}
+{% include "paginate.pug" %}
+{% endblock content %}
+

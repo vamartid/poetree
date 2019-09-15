@@ -1,0 +1,30 @@
+// -- templates/paginate.pug
+.row.s12
+    {% if is_paginated %}
+    ul.pagination
+        {% if page_obj.has_previous %}
+        li.waves-effect
+            a(href='?page=1') First
+        li.waves-effect
+            a(href='?page={{ page_obj.previous_page_number }}')
+                i.material-icons chevron_left
+        {% endif %}
+
+        {% for num in page_obj.paginator.page_range %}
+        {% if page_obj.number == num %}
+        li.active
+            a(href='?page={{ num }}') {{ num }}
+        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+        li.waves-effect
+            a(href='?page={{ num }}') {{ num }}
+        {% endif %}
+        {% endfor %}
+
+        {% if page_obj.has_next %}
+        li.waves-effect
+            a(href='?page={{ page_obj.next_page_number }}')
+                i.material-icons chevron_right
+        li.waves-effect
+            a(href='?page={{ page_obj.paginator.num_pages }}') Last
+        {% endif %}
+    {% endif %}

@@ -1,0 +1,29 @@
+<!-- templates/home.html -->
+{% extends 'base.pug' %}
+{% load staticfiles %}
+
+{% block content %}
+#index-banner.section.no-pad-bot
+  .container
+    .row.center
+      .col.s12.m10.offset-m1
+        h3.header poetree
+        img.waves-effect.waves-teal(src="{% static 'img/tree.png' %}" style="max-width: 60%;")
+      .col.s12.m8.offset-m2
+        h5.light
+          | άυτό είναι το σπίτι μου,
+          br
+          | αυτό είναι το μέρος που κατοικώ
+    .row.center
+      {% if rand_id != -1 %}
+      a#news-button.btn-large.waves-effect.waves-light(href="{% url 'poetree_poems' %}") νέα
+      a#random-button.btn-large.waves-effect.waves-light(href="{% url 'poetree_poem_detail' rand_id %}") τυχαίο
+      {% endif %}
+    .row.center
+      {% if user.is_authenticated %}
+      p γειά σου {{ user.username }}!
+      {% else %}
+      p είστε απλός αναγνώστης
+      a.login(href="{% url 'poetree_login' %}") είσοδος
+      {% endif %}
+{% endblock content %}

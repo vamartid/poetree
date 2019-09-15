@@ -1,0 +1,35 @@
+<!-- templates/register.html -->
+{% extends 'base.pug' %}
+{% load staticfiles %}
+{% load staticfiles %}
+
+{% block content %}
+.row
+  .col.s12
+    .container
+      #login-page.row
+        .col.s8.card-panel.border-radius-6.login-card.bg-opacity-8
+          form.login-form(method="POST" autocomplete="off")
+            {% csrf_token %}
+            .row
+              .input-field.col.s12
+                h5.ml-4 {{title}}
+            .row.margin.form-group
+              .input-field.col.s12
+                i.material-icons.prefix.pt-2 person_outline
+                input#username(type='text' name="{{ form.username.html_name }}" )
+                label.center-align(for='username') Username
+            .row.margin.form-group
+              .input-field.col.s12
+                i.material-icons.prefix.pt-2 lock_outline
+                input#password(type='password' name="{{ form.password.html_name }}")
+                label(for='password') Password
+            .row.form-group
+              .input-field.col.s12
+                button.btn.waves-effect.waves-light.border-round.gradient-45deg-purple-deep-orange.col.s12 μπες
+            .row
+              .col.s7.m7.l7
+                p.margin.medium-small
+                  | θέλεις να συμμετεχεις στο poetree; 
+                  a(href="{% url 'poetree_register' %}") εγραφή
+{% endblock content %}

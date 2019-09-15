@@ -1,0 +1,23 @@
+<!-- templates/poem_form.pug -->
+{% extends 'base.pug' %}
+{% load staticfiles %}
+
+{% block content %}
+.row
+  form.col.s12(method="POST")
+    {% csrf_token %}
+    h1 {{title}}
+    .row.form-group
+        input#title(type='text' value="{{ form.title.value|default_if_none:"" }}" name="{{ form.title.html_name|default_if_none:"" }}")
+        label.center-align(for='title') title
+    .row.form-group
+        input#poem(type='text' value="{{ form.content.value|default_if_none:"" }}" name="{{ form.content.html_name }}")
+        label.center-align(for='poem') poem
+    .form-group
+        button.btn.btn-outline-dark(type='submit')
+            i.fas.fa-check
+        {% if title == "επεξεργασία" %}
+        a.btn.btn-outline-danger(href="{% url 'poetree_poem_detail' object.id %}")
+            i.fas.fa-times
+        {% endif %}
+{% endblock content %}

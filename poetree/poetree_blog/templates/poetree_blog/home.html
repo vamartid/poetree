@@ -1,0 +1,28 @@
+<!-- templates/home.html -->
+{% extends 'base.pug' %}
+{% load staticfiles %}
+
+{% block content %}
+<div class="text-center"> 
+<div >
+    <img src="{% static 'img/tree.png' %}" class="mt-3 img-fluid contrast no-select no-drag font-size-b" style="width:19%;" onContextMenu="return false;" draggable="false"></img>
+    <h1 class="mt-1 no-select no-drag font-size-a" onContextMenu="return false;" draggable="false">poetree</h1>
+</div>
+<span style="font-size: 12px;display:inline-block;margin:12px;">άυτό είναι το σπίτι μου,<br>αυτό είναι το μέρος που κατοικώ</span>
+<br>
+<div>
+    {% if rand_id != -1 %}
+    <a class="btn  btn-dark font-size-b" id="new" href="{% url 'poetree_poems' %}">νέα</a>
+    <a class="btn  btn-dark font-size-b" id="rand" href="{% url 'poetree_poem_detail' rand_id %}">τυχαίο</a>
+    {% endif %}
+</div>
+<div>
+    {% if user.is_authenticated %}
+        γειά σου {{ user.username }}!
+    {% else %}
+        <p>είστε απλός αναγνώστης</p>
+        <a href="{% url 'poetree_login' %}">είσοδος</a>
+    {% endif %}
+</div>
+</div>
+{% endblock content %}
