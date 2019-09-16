@@ -7,16 +7,17 @@
 {% block content %}
 div.container
   .div.row
-    span.flow-text
-        h3 {{ title }}
+    
+    span
+        h3.div.animated.slideInRight {{ title }}
     {% if t2 %}
-    h5
+    h5.animated.slideInLeft
         | το δεντράκι του {{view.kwargs.username}}
         br
         | έχει {{ page_obj.paginator.count }} κλαδάκια
     {% endif%}
     {% for post in posts %}
-    .card.white
+    .card.white.animated.bounceInUp
         .card-content
             span.card-title.center
                 a(href="{% url 'poetree_poem_detail' post.id %}")
